@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_pos_app/pages/home_page.dart';
-import 'package:hotel_pos_app/pages/order_page.dart';
 import 'package:hotel_pos_app/pages/root_page.dart';
 
 void main() {
