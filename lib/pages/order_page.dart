@@ -67,13 +67,8 @@ class _OrderPageState extends State<OrderPage> {
             MyFootTile(),
             ],
           ),
-          Row(
-            children: [
-              Column(
-                
-              )
-            ],
-          )
+          
+          
           
 
 

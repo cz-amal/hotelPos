@@ -1,20 +1,12 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hotel_pos_app/components/my_category_bar.dart';
 import 'package:hotel_pos_app/components/my_location_bar.dart';
-import 'package:hotel_pos_app/components/my_nav_bar.dart';
 import 'package:hotel_pos_app/components/my_search_bar.dart';
 import 'package:hotel_pos_app/components/my_stats_card.dart';
-import 'package:hotel_pos_app/pages/order_page.dart';
-
 import '../components/my_app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
-
-
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -28,7 +20,6 @@ class _HomePageState extends State<HomePage> {
     'all time',
   ];
   String? selectedValue;
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +47,6 @@ class _HomePageState extends State<HomePage> {
             height: 10,
           ),
           MyStatsCard(),
-
           const SizedBox(
             height: 8,
           ),
@@ -66,13 +56,10 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Recent Orders",
-                    style: GoogleFonts.varelaRound(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
+                    style: GoogleFonts.varelaRound(fontSize: 20, fontWeight: FontWeight.bold)),
                 Text("view all",
                     style: GoogleFonts.varelaRound(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue)),
+                        fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue)),
               ],
             ),
           ),
@@ -103,8 +90,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.receipt_long,
-                                  size: 18, color: Colors.black54),
+                              Icon(Icons.receipt_long, size: 18, color: Colors.black54),
                               SizedBox(width: 6),
                               Text(
                                 "#12345678",
@@ -117,8 +103,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Row(
                             children: [
-                              Icon(Icons.calendar_today,
-                                  size: 16, color: Colors.grey),
+                              Icon(Icons.calendar_today, size: 16, color: Colors.grey),
                               SizedBox(width: 4),
                               Text(
                                 "23 Apr 2025",
