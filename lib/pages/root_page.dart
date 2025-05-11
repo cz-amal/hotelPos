@@ -1,14 +1,7 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hotel_pos_app/components/my_category_bar.dart';
-import 'package:hotel_pos_app/components/my_location_bar.dart';
-import 'package:hotel_pos_app/components/my_nav_bar.dart';
-import 'package:hotel_pos_app/components/my_search_bar.dart';
-import 'package:hotel_pos_app/components/my_stats_card.dart';
+import 'package:hotel_pos_app/components/nav_bar.dart';
 import 'package:hotel_pos_app/pages/order_page.dart';
 
-import '../components/my_app_bar.dart';
 import 'home_page.dart';
 
 class RootPage extends StatefulWidget {
@@ -32,7 +25,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         bottomNavigationBar: MyNavBar(
           selectedIndex: _selectedIndex,
           onTabChange: (index) {
@@ -44,7 +37,7 @@ class _RootPageState extends State<RootPage> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(5),
           child: AppBar(
-            backgroundColor: Colors.orange[500],
+            backgroundColor: Colors.black,
           ),
         ),
         body: pages[_selectedIndex]);

@@ -14,7 +14,7 @@ class _MyLocationBarState extends State<MyLocationBar> {
     return Container(
       height: 20,
       decoration: BoxDecoration(
-        color: Colors.orange[500],
+        color: Colors.black,
       ),
       child: Row(
         spacing: 4,

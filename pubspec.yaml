@@ -39,6 +39,8 @@ dependencies:
   google_nav_bar: ^5.0.7
   line_icons: ^2.0.3
   dropdown_button2: ^2.3.9
+  chips_choice: ^3.0.1
+  flutter_riverpod: ^2.6.1
 
 dev_dependencies:
   flutter_test:

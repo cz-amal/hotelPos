@@ -1,0 +1,11 @@
+{
+    "cmake.sourceDirectory": "C:/Users/amal/Documents/hotel-pos-app/windows",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

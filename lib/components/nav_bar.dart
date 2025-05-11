@@ -16,18 +16,18 @@ class MyNavBar extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 40),
       margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16), color: Colors.grey[100]),
+          borderRadius: BorderRadius.circular(16), color: Colors.grey[800]),
       child: GNav(
           onTabChange: onTabChange,
           selectedIndex: selectedIndex,
           padding: EdgeInsets.all(12),
-          backgroundColor: Colors.grey[100]!,
+          backgroundColor: Colors.grey.shade800,
           activeColor: Colors.orange,
           tabs: [
-            GButton(icon: Icons.home),
-            GButton(icon: Icons.shopping_cart),
-            GButton(icon: Icons.inventory),
-            GButton(icon: Icons.show_chart)
+            GButton(icon: Icons.home,iconColor: Colors.white,),
+            GButton(icon: Icons.shopping_cart,iconColor: Colors.white,),
+            GButton(icon: Icons.inventory,iconColor: Colors.white,),
+            GButton(icon: Icons.show_chart,iconColor: Colors.white,)
           ]),
     );
   }

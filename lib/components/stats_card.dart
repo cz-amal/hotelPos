@@ -23,7 +23,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
-        color: Colors.white,
+        color: Colors.black,
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Container(
@@ -45,7 +45,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                       const SizedBox(width: 6),
                       Text("23 Sept 2024",
                           style: GoogleFonts.varelaRound(
-                            color: Colors.black87,
+                            color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           )),
@@ -60,7 +60,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                         child: Text(
                           item,
                           style: GoogleFonts.varelaRound(
-                            color: Colors.black87,
+                            color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
@@ -82,7 +82,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                       dropdownStyleData: DropdownStyleData(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Colors.grey[100],
+                          color: Colors.grey[850],
                         ),
                       ),
                     ),
@@ -106,7 +106,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                           const SizedBox(width: 6),
                           Text("Orders",
                               style: GoogleFonts.varelaRound(
-                                  color: Colors.black87,
+                                  color: Colors.white,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
                         ],
@@ -114,7 +114,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                       const SizedBox(height: 6),
                       Text("3,445",
                           style: GoogleFonts.varelaRound(
-                              color: Colors.blueGrey,
+                              color: Colors.grey[300],
                               fontSize: 22,
                               fontWeight: FontWeight.bold)),
                     ],
@@ -129,7 +129,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                           const SizedBox(width: 6),
                           Text("Sales",
                               style: GoogleFonts.varelaRound(
-                                  color: Colors.black87,
+                                  color: Colors.white,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
                         ],
@@ -137,7 +137,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                       const SizedBox(height: 6),
                       Text("34,576",
                           style: GoogleFonts.varelaRound(
-                              color: Colors.blueGrey,
+                              color: Colors.grey[300],
                               fontSize: 22,
                               fontWeight: FontWeight.bold)),
                     ],

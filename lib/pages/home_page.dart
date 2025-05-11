@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hotel_pos_app/components/my_location_bar.dart';
-import 'package:hotel_pos_app/components/my_search_bar.dart';
-import 'package:hotel_pos_app/components/my_stats_card.dart';
-import '../components/my_app_bar.dart';
+import 'package:hotel_pos_app/components/location_bar.dart';
+import 'package:hotel_pos_app/components/search_bar.dart';
+import 'package:hotel_pos_app/components/stats_card.dart';
+
+import '../components/app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10),
                 ),
-                color: Colors.orange[500],
+                color: Colors.black
               ),
             ),
             MySearchBar()
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Recent Orders",
-                    style: GoogleFonts.varelaRound(fontSize: 20, fontWeight: FontWeight.bold)),
+                    style: GoogleFonts.varelaRound(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.white)),
                 Text("view all",
                     style: GoogleFonts.varelaRound(
                         fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue)),
@@ -71,8 +72,9 @@ class _HomePageState extends State<HomePage> {
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.black,
                     borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Colors.white),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black12,
@@ -95,6 +97,7 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 "#12345678",
                                 style: GoogleFonts.varelaRound(
+                                  color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -109,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                                 "23 Apr 2025",
                                 style: GoogleFonts.varelaRound(
                                   fontSize: 12,
-                                  color: Colors.grey[600],
+                                  color: Colors.white,
                                 ),
                               ),
                             ],
@@ -176,7 +179,7 @@ Widget _buildInfoTile({
               label,
               style: GoogleFonts.varelaRound(
                 fontSize: 11,
-                color: Colors.grey[600],
+                color: Colors.white,
               ),
             ),
           ),
@@ -191,6 +194,7 @@ Widget _buildInfoTile({
                 style: GoogleFonts.varelaRound(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
+                  color: Colors.white
                 ),
               ),
             )
