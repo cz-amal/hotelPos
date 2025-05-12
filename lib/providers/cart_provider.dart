@@ -12,7 +12,7 @@ class CartListNotifier extends Notifier<CartList> {
     return CartList(cartList: []);
   }
 
-  int getTotalItemInCart(String cartId){
+  int getTotalItemInCart(String cartId) {
     final cart = state.cartList.firstWhere((cart) => cart.cartId == cartId);
     return cart.items.length;
   }
@@ -22,14 +22,12 @@ class CartListNotifier extends Notifier<CartList> {
     return cart.items.fold(0.0, (sum, item) => sum + item.totalprice);
   }
 
-
-
-
   int getQuantity(String cartId, String itemId) {
     final cart = state.cartList.firstWhere((cart) => cart.cartId == cartId);
     final item = cart.items.firstWhere(
-          (item) => item.id == itemId,
-      orElse: () => CartItem(id: itemId, name: '', price: 0.0, quantity: 0, totalprice: 0.0),
+      (item) => item.id == itemId,
+      orElse: () => CartItem(
+          id: itemId, name: '', price: 0.0, quantity: 0, totalprice: 0.0),
     );
     return item.quantity;
   }
@@ -37,12 +35,12 @@ class CartListNotifier extends Notifier<CartList> {
   double getTotalPrice(String cartId, String itemId) {
     final cart = state.cartList.firstWhere((cart) => cart.cartId == cartId);
     final item = cart.items.firstWhere(
-          (item) => item.id == itemId,
-      orElse: () => CartItem(id: itemId, name: '', price: 0.0, quantity: 0, totalprice: 0.0),
+      (item) => item.id == itemId,
+      orElse: () => CartItem(
+          id: itemId, name: '', price: 0.0, quantity: 0, totalprice: 0.0),
     );
     return item.totalprice;
   }
-
 
   int _nextCartId = 1;
 
@@ -89,7 +87,7 @@ class CartListNotifier extends Notifier<CartList> {
         cartList: state.cartList.map((cart) {
       if (cart.cartId == cartId) {
         final item = cart.items.firstWhere((item) => item.id == itemId);
-        if(item.quantity != 0){
+        if (item.quantity != 0) {
           item.quantity -= 1;
           item.totalprice -= item.price;
         }
