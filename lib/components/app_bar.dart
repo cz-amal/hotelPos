@@ -76,7 +76,7 @@ class _MyAppBarState extends State<MyAppBar> {
                         Container(
                           height: 8,
                           width: 8,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.green,
                             shape: BoxShape.circle,
                           ),
@@ -99,13 +99,6 @@ class _MyAppBarState extends State<MyAppBar> {
             // Action buttons
             Row(
               children: [
-                _buildActionButton(
-                  onPressed: () {
-                    // Handle notifications
-                  },
-                  icon: Icons.notifications_outlined,
-                  hasNotification: true,
-                ),
                 const SizedBox(width: 12),
                 _buildActionButton(
                   onPressed: () {
@@ -158,45 +151,23 @@ class _MyAppBarState extends State<MyAppBar> {
   Widget _buildActionButton({
     required VoidCallback onPressed,
     required IconData icon,
-    bool hasNotification = false,
   }) {
-    return Stack(
-      children: [
-        Container(
-          height: 40,
-          width: 40,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: const Color(0xFF1E1E1E),
-          ),
-          child: IconButton(
-            padding: EdgeInsets.zero,
-            onPressed: onPressed,
-            icon: Icon(
-              icon,
-              size: 24,
-              color: Colors.grey[300],
-            ),
-          ),
+    return Container(
+      height: 40,
+      width: 40,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: const Color(0xFF1E1E1E),
+      ),
+      child: IconButton(
+        padding: EdgeInsets.zero,
+        onPressed: onPressed,
+        icon: Icon(
+          icon,
+          size: 24,
+          color: Colors.grey[300],
         ),
-        if (hasNotification)
-          Positioned(
-            right: 5,
-            top: 5,
-            child: Container(
-              height: 10,
-              width: 10,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: const Color(0xFF1E1E1E),
-                  width: 1.5,
-                ),
-              ),
-            ),
-          ),
-      ],
+      ),
     );
   }
 

@@ -5,7 +5,6 @@ import 'package:hotel_pos_app/components/quantity_button.dart';
 import 'package:logger/logger.dart';
 
 import '../models/cart_item.dart';
-import '../models/products.dart';
 import '../providers/cart_provider.dart';
 
 class CartItemBar extends ConsumerStatefulWidget {
@@ -164,6 +163,5 @@ class _CartItemBarState extends ConsumerState<CartItemBar> {
         ),
       ),
     );
-    ;
   }
 }

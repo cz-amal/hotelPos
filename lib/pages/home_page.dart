@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hotel_pos_app/components/location_bar.dart';
 import 'package:hotel_pos_app/components/search_bar.dart';
 import 'package:hotel_pos_app/components/stats_card.dart';
-
+import 'package:hotel_pos_app/pages/menu_page.dart';
+import 'package:hotel_pos_app/pages/order_page.dart';
 import '../components/app_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +31,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212), // Darker background for better contrast
+      backgroundColor:
+          const Color(0xFF121212), // Darker background for better contrast
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -63,17 +64,18 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                        "Recent Orders",
+                    Text("Recent Orders",
                         style: GoogleFonts.varelaRound(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
-                        )
-                    ),
+                        )),
                     TextButton(
                       onPressed: () {
-                        // Handle view all action
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const OrderPage()));
                       },
                       child: Row(
                         children: [
@@ -115,13 +117,17 @@ class _HomePageState extends State<HomePage> {
                           checkmarkColor: Colors.white,
                           labelStyle: GoogleFonts.varelaRound(
                             color: isSelected ? Colors.white : Colors.grey[300],
-                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.normal,
                           ),
                           backgroundColor: const Color(0xFF1E1E1E),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),
                             side: BorderSide(
-                              color: isSelected ? Colors.blue[700]! : Colors.grey[800]!,
+                              color: isSelected
+                                  ? Colors.blue[700]!
+                                  : Colors.grey[800]!,
                               width: 1,
                             ),
                           ),
@@ -156,7 +162,8 @@ class _HomePageState extends State<HomePage> {
                 final status = statuses[index % statuses.length];
 
                 return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
@@ -209,7 +216,8 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     const SizedBox(width: 10),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Order #${12340 + index}",
@@ -250,7 +258,8 @@ class _HomePageState extends State<HomePage> {
                                         vertical: 5,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: status['color'].withOpacity(0.15),
+                                        color:
+                                            status['color'].withOpacity(0.15),
                                         borderRadius: BorderRadius.circular(30),
                                       ),
                                       child: Text(
@@ -314,7 +323,8 @@ class _HomePageState extends State<HomePage> {
                                     onPressed: () {
                                       // Handle view details
                                     },
-                                    icon: const Icon(Icons.visibility_outlined, size: 18),
+                                    icon: const Icon(Icons.visibility_outlined,
+                                        size: 18),
                                     label: Text(
                                       "Details",
                                       style: GoogleFonts.varelaRound(
@@ -324,7 +334,8 @@ class _HomePageState extends State<HomePage> {
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.blue[700],
                                       foregroundColor: Colors.white,
-                                      padding: const EdgeInsets.symmetric(vertical: 12),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 12),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
@@ -338,7 +349,8 @@ class _HomePageState extends State<HomePage> {
                                     onPressed: () {
                                       // Handle print action
                                     },
-                                    icon: const Icon(Icons.print, color: Colors.white),
+                                    icon: const Icon(Icons.print,
+                                        color: Colors.white),
                                   ),
                                 ),
                               ],
@@ -391,14 +403,6 @@ class _HomePageState extends State<HomePage> {
         onTap: (index) {
           // Handle navigation
         },
-      ),
-      // Add a floating action button for quick actions
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Handle new order creation
-        },
-        backgroundColor: Colors.blue,
-        child: const Icon(Icons.add),
       ),
     );
   }
