@@ -11,7 +11,7 @@ class TabNotifier extends Notifier<TabState> {
   void addTab() {
     state = TabState(
       tabNames: [...state.tabNames, (++cartNumber).toString()],
-      tabContent: [...state.tabContent, Text("next")],
+      tabContent: [...state.tabContent, const Text("next")],
     );
   }
 

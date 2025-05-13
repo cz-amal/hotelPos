@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_pos_app/components/nav_bar.dart';
 import 'package:hotel_pos_app/pages/order_page.dart';
+import 'package:hotel_pos_app/pages/summary_page.dart';
 
 import 'home_page.dart';
 
@@ -18,7 +19,7 @@ class _RootPageState extends State<RootPage> {
     'past month',
     'all time',
   ];
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
 
   final List<Widget> pages = [const HomePage(), const OrderPage()];
 
@@ -35,7 +36,7 @@ class _RootPageState extends State<RootPage> {
           },
         ),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(5),
+          preferredSize: const Size.fromHeight(5),
           child: AppBar(
             backgroundColor: Colors.black,
           ),

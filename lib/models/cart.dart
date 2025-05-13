@@ -1,4 +1,3 @@
-import 'package:line_icons/line_icon.dart';
 
 import 'cart_item.dart';
 

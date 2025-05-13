@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hotel_pos_app/components/cart_summary.dart';
 import 'package:hotel_pos_app/components/chip_choice.dart';
@@ -41,7 +42,6 @@ class _OrderPageState extends ConsumerState<OrderPage>
   @override
   Widget build(BuildContext context) {
     final products = ref.watch(productProvider);
-    final tabState = ref.watch(tabNotifierProvider);
     final cartList = ref.watch(cartListNotifierProvider);
     final currentIndex = _tabController.index;
 
@@ -57,20 +57,31 @@ class _OrderPageState extends ConsumerState<OrderPage>
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-          backgroundColor: Colors.black87,
-          leading: Icon(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
-          title: Text(
-            "menu",
-            style: TextStyle(color: Colors.white),
+          onPressed: () {},
+        ),
+        title: Text(
+          "Your Menu",
+          style: GoogleFonts.poppins(
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
           ),
-          bottom: CustomTabBar(
-            controller: _tabController,
-          )),
+        ),
+        bottom: CustomTabBar(
+          controller: _tabController,
+        ),
+        elevation: 0,
+        centerTitle: true,
+      ),
       floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         onPressed: () {
           ref.read(cartListNotifierProvider.notifier).addCart();
           ref.read(tabNotifierProvider.notifier).addTab();
@@ -89,7 +100,7 @@ class _OrderPageState extends ConsumerState<OrderPage>
                 const SizedBox(
                   height: 10,
                 ),
-                ChipChoice(),
+                const ChipChoice(),
                 const SizedBox(height: 10),
                 Expanded(
                   child: GridView.builder(
@@ -105,7 +116,7 @@ class _OrderPageState extends ConsumerState<OrderPage>
                     ),
                     itemBuilder: (context, index) {
                       return MyMenuBar(
-                        cartId: cartList.cartList[tabIndex].cartId ,
+                        cartId: cartList.cartList[tabIndex].cartId,
                         product: products[index],
                       );
                     },
@@ -118,7 +129,10 @@ class _OrderPageState extends ConsumerState<OrderPage>
                     ? SizedBox(
                         height: 80,
                         width: 340,
-                        child: CartSummaryBanner(showSummary: showSummary,cartId: cartList.cartList[tabIndex].cartId,))
+                        child: CartSummaryBanner(
+                          showSummary: showSummary,
+                          cartId: cartList.cartList[tabIndex].cartId,
+                        ))
                     : Container(),
               ],
             );

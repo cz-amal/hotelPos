@@ -41,6 +41,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   chips_choice: ^3.0.1
   flutter_riverpod: ^2.6.1
+  logger: ^2.5.0
 
 dev_dependencies:
   flutter_test:

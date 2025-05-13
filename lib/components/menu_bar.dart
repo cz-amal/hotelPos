@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotel_pos_app/models/cart.dart';
 import 'package:hotel_pos_app/providers/cart_provider.dart';
 
+import '../models/cart_item.dart';
 import '../models/products.dart';
 
 class MyMenuBar extends ConsumerStatefulWidget {
@@ -18,7 +20,14 @@ class MyMenuBar extends ConsumerStatefulWidget {
 class _MyMenuBarState extends ConsumerState<MyMenuBar> {
   @override
   Widget build(BuildContext context) {
-    final cartList = ref.watch(cartListNotifierProvider);
+    final quantity = ref
+        .watch(cartListNotifierProvider)
+        .cartList
+        .firstWhere((cart) => cart.cartId == widget.cartId,orElse: ()=>Cart(cartId: "", items: []))
+        .items
+        .firstWhere((item) => item.id == widget.product.id,orElse: ()=>CartItem(id: "", name: "", price: 0, quantity: 0))
+        .quantity;
+
     return Card(
       shadowColor: Colors.orange,
       color: Colors.black,
@@ -69,17 +78,19 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
                     ),
                   ),
                 ),
-                ref.read(cartListNotifierProvider.notifier).getQuantity(
-                            widget.cartId, widget.product.id) <= 0
+                ref
+                            .read(cartListNotifierProvider.notifier)
+                            .getQuantity(widget.cartId, widget.product.id) <=
+                        0
                     ? ElevatedButton(
                         onPressed: () {
                           ref
                               .read(cartListNotifierProvider.notifier)
-                              .addItemToCart(widget.cartId,
-                                  widget.product.toCartItem());
+                              .addItemToCart(
+                                  widget.cartId, widget.product.toCartItem());
                         },
                         style: ElevatedButton.styleFrom(
-                          side: BorderSide(color: Colors.orange),
+                          side: const BorderSide(color: Colors.orange),
                           backgroundColor: Colors.black,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 6),
@@ -104,8 +115,8 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
                               onPressed: () {
                                 ref
                                     .read(cartListNotifierProvider.notifier)
-                                    .decrementCart(widget.cartId,
-                                        widget.product.id);
+                                    .decrementCart(
+                                        widget.cartId, widget.product.id);
                               },
                               constraints: const BoxConstraints(),
                               style: IconButton.styleFrom(
@@ -127,11 +138,7 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
                                 color: Colors.white),
                             child: Align(
                               child: Text(
-                                ref
-                                    .read(cartListNotifierProvider.notifier)
-                                    .getQuantity(widget.cartId,
-                                        widget.product.id)
-                                    .toString(),
+                                quantity.toString(),
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -144,8 +151,8 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
                               onPressed: () {
                                 ref
                                     .read(cartListNotifierProvider.notifier)
-                                    .incrementCart(widget.cartId,
-                                        widget.product.id);
+                                    .incrementCart(
+                                        widget.cartId, widget.product.id);
                               },
                               style: IconButton.styleFrom(
                                   backgroundColor: Colors.green,
