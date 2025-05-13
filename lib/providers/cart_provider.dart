@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotel_pos_app/models/cart_item.dart';
 import 'package:hotel_pos_app/models/cart_list.dart';
-import 'package:line_icons/line_icon.dart';
 
 import '../models/cart.dart';
 
@@ -68,6 +66,19 @@ class CartListNotifier extends Notifier<CartList> {
     state = newCartList;
   }
 
+  void deleteItemFromCart(String cartId, String itemId) {
+    final updatedCartList = state.cartList.map((cart) {
+      if (cart.cartId == cartId) {
+        final newItems = cart.items.where((item) => item.id != itemId).toList();
+        return Cart(cartId: cart.cartId, items: newItems);
+      }
+      return cart;
+    }).toList();
+
+    state = CartList(cartList: updatedCartList);
+    print(state.toString());
+  }
+
   void incrementCart(String cartId, String itemId) {
     CartList newCartList = CartList(
         cartList: state.cartList.map((cart) {
@@ -83,18 +94,31 @@ class CartListNotifier extends Notifier<CartList> {
   }
 
   void decrementCart(String cartId, String itemId) {
-    CartList newCartList = CartList(
-        cartList: state.cartList.map((cart) {
+    final updatedCartList = state.cartList.map((cart) {
       if (cart.cartId == cartId) {
-        final item = cart.items.firstWhere((item) => item.id == itemId);
-        if (item.quantity != 0) {
-          item.quantity -= 1;
-          item.totalprice -= item.price;
-        }
+        final updatedItems = cart.items
+            .map((item) {
+              if (item.id == itemId) {
+                if (item.quantity <= 1) return null; // Mark for deletion
+                return CartItem(
+                  id: item.id,
+                  name: item.name,
+                  quantity: item.quantity - 1,
+                  price: item.price,
+                  totalprice: item.totalprice - item.price,
+                );
+              }
+              return item;
+            })
+            .whereType<CartItem>()
+            .toList();
+
+        return Cart(cartId: cart.cartId, items: updatedItems);
       }
       return cart;
-    }).toList());
-    state = newCartList;
+    }).toList();
+
+    state = CartList(cartList: updatedCartList);
   }
 }
 

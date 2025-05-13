@@ -13,7 +13,7 @@ class _MyLocationBarState extends State<MyLocationBar> {
   Widget build(BuildContext context) {
     return Container(
       height: 20,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.black,
       ),
       child: Row(
@@ -22,7 +22,7 @@ class _MyLocationBarState extends State<MyLocationBar> {
           const SizedBox(
             width: 23,
           ),
-          Icon(
+          const Icon(
             Icons.pin_drop,
             color: Colors.white,
           ),

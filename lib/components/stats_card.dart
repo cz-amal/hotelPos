@@ -23,13 +23,13 @@ class _MyStatsCardState extends State<MyStatsCard> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
-        color: Colors.black,
+        color: const Color(0xFF121212),
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.orangeAccent),
+            border: Border.all(color: Colors.blueAccent),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -40,7 +40,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.calendar_today,
+                      const Icon(Icons.calendar_today,
                           color: Colors.orangeAccent, size: 16),
                       const SizedBox(width: 6),
                       Text("23 Sept 2024",
@@ -101,7 +101,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.shopping_cart_outlined,
+                          const Icon(Icons.shopping_cart_outlined,
                               color: Colors.blueAccent, size: 18),
                           const SizedBox(width: 6),
                           Text("Orders",
@@ -124,7 +124,7 @@ class _MyStatsCardState extends State<MyStatsCard> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.attach_money,
+                          const Icon(Icons.attach_money,
                               color: Colors.green, size: 18),
                           const SizedBox(width: 6),
                           Text("Sales",
