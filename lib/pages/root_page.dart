@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_pos_app/components/nav_bar.dart';
-import 'package:hotel_pos_app/pages/order_page.dart';
-import 'package:hotel_pos_app/pages/summary_page.dart';
+import 'package:hotel_pos_app/pages/menu_page.dart';
 
 import 'home_page.dart';
 
@@ -21,7 +20,7 @@ class _RootPageState extends State<RootPage> {
   ];
   int _selectedIndex = 2;
 
-  final List<Widget> pages = [const HomePage(), const OrderPage()];
+  final List<Widget> pages = [const HomePage(), const MenuPage()];
 
   @override
   Widget build(BuildContext context) {
