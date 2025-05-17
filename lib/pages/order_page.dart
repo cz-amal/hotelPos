@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class OrderPage extends StatefulWidget {
+import '../providers/order_provider.dart';
+
+class OrderPage extends ConsumerStatefulWidget {
   const OrderPage({super.key});
 
   @override
-  State<OrderPage> createState() => _OrderPageState();
+  ConsumerState<OrderPage> createState() => _OrderPageState();
 }
 
-class _OrderPageState extends State<OrderPage> {
+class _OrderPageState extends ConsumerState<OrderPage> {
   final List<String> filterOptions = [
     'Today',
     'Past Week',
@@ -25,12 +28,15 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
+    final orderList = ref.watch(orderListNotifierProvider);
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0A),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
@@ -104,15 +110,26 @@ class _OrderPageState extends State<OrderPage> {
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                itemCount: 3,
+                itemCount: orderList.orderList.length,
                 itemBuilder: (context, index) {
                   // Sample status data for visual variety
                   final List<Map<String, dynamic>> statuses = [
                     {'text': 'Completed', 'color': Colors.green},
                     {'text': 'Pending', 'color': Colors.orange},
                     {'text': 'Processing', 'color': Colors.blue},
+                    {'text': 'Cancelled', 'color': Colors.red},
+                    {'text': 'Refunded', 'color': Colors.purple},
+                    {'text': 'On Hold', 'color': Colors.yellow},
+                    {'text': 'Shipped', 'color': Colors.teal},
+                    {'text': 'Delivered', 'color': Colors.greenAccent},
+                    {'text': 'Returned', 'color': Colors.redAccent},
+                    {'text': 'Failed', 'color': Colors.grey},
+                    {'text': 'Completed', 'color': Colors.green},
+                    {'text': 'Pending', 'color': Colors.orange},
+                    {'text': 'Processing', 'color': Colors.blue},
                   ];
                   final status = statuses[index % statuses.length];
+
 
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -157,7 +174,7 @@ class _OrderPageState extends State<OrderPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Order #${12340 + index}",
+                                          "Order #${orderList.orderList[index].orderId}",
                                           style: GoogleFonts.varelaRound(
                                             color: Colors.white,
                                             fontSize: 16,
@@ -174,7 +191,7 @@ class _OrderPageState extends State<OrderPage> {
                                             ),
                                             const SizedBox(width: 4),
                                             Text(
-                                              "10:${30 + index * 5} AM",
+                                              "${orderList.orderList[index].date}",
                                               style: GoogleFonts.varelaRound(
                                                 fontSize: 13,
                                                 color: Colors.grey,
@@ -232,13 +249,13 @@ class _OrderPageState extends State<OrderPage> {
                                 _buildInfoTile(
                                   icon: Icons.shopping_bag_outlined,
                                   label: "Items",
-                                  value: "${4 + index}x",
+                                  value: "${orderList.orderList[index].itemCount}x",
                                   iconColor: Colors.amber,
                                 ),
                                 _buildInfoTile(
                                   icon: Icons.attach_money,
                                   label: "Total",
-                                  value: "₹${120 + index * 50}",
+                                  value: "₹${orderList.orderList[index].totalPrice}",
                                   iconColor: Colors.green,
                                 ),
                               ],

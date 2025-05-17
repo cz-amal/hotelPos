@@ -1,0 +1,2 @@
+C:/Users/amal/Documents/hotel-pos-app/android/app/.cxx/Debug/1544126y/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/amal/Documents/hotel-pos-app/android/app/.cxx/Debug/1544126y/armeabi-v7a/CMakeFiles/rebuild_cache.dir

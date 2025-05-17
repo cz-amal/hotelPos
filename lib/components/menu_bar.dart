@@ -23,19 +23,25 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
     final quantity = ref
         .watch(cartListNotifierProvider)
         .cartList
-        .firstWhere((cart) => cart.cartId == widget.cartId,orElse: ()=>Cart(cartId: "", items: []))
+        .firstWhere((cart) => cart.cartId == widget.cartId,
+            orElse: () => Cart(cartId: "", items: []))
         .items
-        .firstWhere((item) => item.id == widget.product.id,orElse: ()=>CartItem(id: "", name: "", price: 0, quantity: 0))
+        .firstWhere((item) => item.id == widget.product.id,
+            orElse: () => CartItem(id: "", name: "", price: 0, quantity: 0))
         .quantity;
 
-    return Card(
-      shadowColor: Colors.orange,
-      color: Colors.black,
+    return Container(
+      margin: const EdgeInsets.all(6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: const Color(0xFF1E1E1E),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(height: 10,),
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
@@ -47,7 +53,7 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
             const SizedBox(height: 8),
             Text(
               widget.product.name,
-              style: GoogleFonts.varelaRound(
+              style: GoogleFonts.poppins(
                 fontSize: 15,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -56,7 +62,7 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
             const SizedBox(height: 2),
             Text(
               widget.product.description,
-              style: GoogleFonts.varelaRound(
+              style: GoogleFonts.poppins(
                 fontSize: 10,
                 color: Colors.grey[300],
               ),
@@ -70,11 +76,10 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
                 Padding(
                   padding: const EdgeInsets.only(top: 14, bottom: 14),
                   child: Text(
-                    widget.product.price.toString(),
-                    style: TextStyle(
+                    "₹ ${widget.product.price}",
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
                       color: Colors.green[300],
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
                     ),
                   ),
                 ),
@@ -91,7 +96,7 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
                         },
                         style: ElevatedButton.styleFrom(
                           side: const BorderSide(color: Colors.orange),
-                          backgroundColor: Colors.black,
+                          backgroundColor: const Color(0xFF1E1E1E),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 6),
                           shape: RoundedRectangleBorder(
@@ -101,7 +106,7 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
                         ),
                         child: Text(
                           "Add",
-                          style: GoogleFonts.varelaRound(
+                          style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -139,10 +144,10 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
                             child: Align(
                               child: Text(
                                 quantity.toString(),
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10),
+                                style: GoogleFonts.poppins(
+                                  fontSize: 10,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                           ),

@@ -84,19 +84,18 @@ class _CartSummaryBannerState extends ConsumerState<CartSummaryBanner>
                           children: [
                             Text(
                                 "${ref.read(cartListNotifierProvider.notifier).getTotalItemInCart(widget.cartId)} items",
-                                style: GoogleFonts.varelaRound(
+                                style: GoogleFonts.poppins(
                                     fontSize: 10, color: Colors.white)),
                             Text(
                                 "₹ ${ref.read(cartListNotifierProvider.notifier).getTotalPriceOfCart(widget.cartId)}",
-                                style: GoogleFonts.varelaRound(
+                                style: GoogleFonts.poppins(
                                     color: Colors.green))
                           ],
                         ),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 6, vertical: 4),
+
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 )),
