@@ -31,8 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          const Color(0xFF121212), // Darker background for better contrast
+      backgroundColor: const Color(0xFF0A0A0A),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -369,6 +368,7 @@ class _HomePageState extends State<HomePage> {
       // Add a bottom navigation bar for better navigation
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xFF151515),
+        enableFeedback: false,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
@@ -401,7 +401,14 @@ class _HomePageState extends State<HomePage> {
         ],
         currentIndex: 0,
         onTap: (index) {
-          // Handle navigation
+          if (index == 1) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const OrderPage()));
+          }
+          if(index == 2){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const MenuPage()));
+          }
         },
       ),
     );

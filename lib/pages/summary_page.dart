@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_pos_app/components/cart_item_bar.dart';
+import 'package:hotel_pos_app/pages/payment_page.dart';
 import 'package:hotel_pos_app/providers/cart_provider.dart';
 import 'package:logger/logger.dart';
 
@@ -18,15 +18,15 @@ class _SummaryPageState extends ConsumerState<SummaryPage> {
   bool _showDetails = false;
   var logger = Logger();
 
-
-
   @override
   Widget build(BuildContext context) {
     final cartList = ref.watch(cartListNotifierProvider);
     final items = cartList.cartList
         .firstWhere((item) => item.cartId == widget.cartId)
         .items;
-    final totalMrp = ref.read(cartListNotifierProvider.notifier).getTotalPriceOfCart(widget.cartId);
+    final totalMrp = ref
+        .read(cartListNotifierProvider.notifier)
+        .getTotalPriceOfCart(widget.cartId);
 
     logger.i("length of itemList is ${items.length}");
     return Scaffold(
@@ -94,7 +94,7 @@ class _SummaryPageState extends ConsumerState<SummaryPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                (totalMrp*1.035).toStringAsFixed(2),
+                                (totalMrp * 1.035).toStringAsFixed(2),
                                 style: GoogleFonts.varelaRound(
                                     color: Colors.green,
                                     fontWeight: FontWeight.bold),
@@ -116,7 +116,16 @@ class _SummaryPageState extends ConsumerState<SummaryPage> {
                           ),
                         ),
                         ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PaymentPage(
+                                            price: (totalMrp * 1.035)
+                                                .toStringAsFixed(2),
+                                            cartId: widget.cartId,
+                                          )));
+                            },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.deepOrangeAccent,
                                 elevation: 0,
@@ -172,11 +181,14 @@ class _SummaryPageState extends ConsumerState<SummaryPage> {
                                     ],
                                   ),
                                   const SizedBox(height: 16),
-                                  _buildPriceRow("Total MRP", totalMrp.toString()),
+                                  _buildPriceRow(
+                                      "Total MRP", totalMrp.toString()),
                                   const SizedBox(height: 12),
-                                  _buildPriceRow("CGST (2%)", (totalMrp*0.02).toStringAsFixed(2)),
+                                  _buildPriceRow("CGST (2%)",
+                                      (totalMrp * 0.02).toStringAsFixed(2)),
                                   const SizedBox(height: 12),
-                                  _buildPriceRow("SGST (1.5%)", (totalMrp*0.015).toStringAsFixed(2)),
+                                  _buildPriceRow("SGST (1.5%)",
+                                      (totalMrp * 0.015).toStringAsFixed(2)),
                                   const Padding(
                                     padding: EdgeInsets.symmetric(vertical: 12),
                                     child: Divider(
@@ -186,7 +198,7 @@ class _SummaryPageState extends ConsumerState<SummaryPage> {
                                   ),
                                   _buildPriceRow(
                                     "Order Total",
-                                    (totalMrp*1.035).toStringAsFixed(2),
+                                    (totalMrp * 1.035).toStringAsFixed(2),
                                     isTotal: true,
                                   ),
                                 ],

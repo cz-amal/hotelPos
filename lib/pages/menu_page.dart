@@ -5,7 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hotel_pos_app/components/cart_summary.dart';
 import 'package:hotel_pos_app/components/chip_choice.dart';
-import 'package:hotel_pos_app/components/tab_bar.dart';
+import 'package:hotel_pos_app/components/custom_tab_bar.dart';
+import 'package:hotel_pos_app/pages/summary_page.dart';
 import 'package:hotel_pos_app/providers/cart_provider.dart';
 import 'package:hotel_pos_app/providers/product_provider.dart';
 import 'package:hotel_pos_app/providers/tab_provider.dart';
@@ -55,88 +56,111 @@ class _OrderPageState extends ConsumerState<MenuPage>
       );
     }
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () {},
-        ),
-        title: Text(
-          "Your Menu",
-          style: GoogleFonts.poppins(
-            fontSize: 20,
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.5,
+          title: Text(
+            "Your Menu",
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.5,
+            ),
+          ),
+          elevation: 0,
+          centerTitle: true,
+          bottom: CustomTabBar(
+            controller: _tabController,
           ),
         ),
-        bottom: CustomTabBar(
-          controller: _tabController,
+        floatingActionButton: FloatingActionButton(
+          shape: const CircleBorder(),
+          onPressed: () {
+            ref.read(cartListNotifierProvider.notifier).addCart();
+            ref.read(tabNotifierProvider.notifier).addTab();
+            print(cartList.toString());
+          },
+          backgroundColor: Colors.orange[500],
+          child: const Icon(
+            Icons.add,
+            color: Colors.black,
+          ),
         ),
-        elevation: 0,
-        centerTitle: true,
-      ),
-      floatingActionButton: FloatingActionButton(
-        shape: const CircleBorder(),
-        onPressed: () {
-          ref.read(cartListNotifierProvider.notifier).addCart();
-          ref.read(tabNotifierProvider.notifier).addTab();
-          print(cartList.toString());
-        },
-        backgroundColor: Colors.orange[500],
-        child: const Icon(Icons.add),
-      ),
-      body: TabBarView(
-          controller: _tabController,
-          children: List.generate(cartList.cartList.length, (tabIndex) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Filters
-                const SizedBox(
-                  height: 10,
-                ),
-                const ChipChoice(),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: GridView.builder(
-                    // Changed back to GridView.builder
-                    itemCount: products.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      // Added gridDelegate
-                      crossAxisCount: 2, // 2 columns
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 5,
-                      childAspectRatio: 0.9,
-                    ),
-                    itemBuilder: (context, index) {
-                      return MyMenuBar(
-                        cartId: cartList.cartList[tabIndex].cartId,
-                        product: products[index],
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                showSummary
-                    ? SizedBox(
-                        height: 80,
-                        width: 340,
-                        child: CartSummaryBanner(
-                          showSummary: showSummary,
+        body: TabBarView(
+            controller: _tabController,
+            children: List.generate(cartList.cartList.length, (tabIndex) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // const ChipChoice(),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: GridView.builder(
+                      // Changed back to GridView.builder
+                      itemCount: products.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        // Added gridDelegate
+                        crossAxisCount: 2, // 2 columns
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 5,
+                        childAspectRatio: 0.9,
+                      ),
+                      itemBuilder: (context, index) {
+                        return MyMenuBar(
                           cartId: cartList.cartList[tabIndex].cartId,
-                        ))
-                    : Container(),
-              ],
-            );
-          })),
-    );
+                          product: products[index],
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  showSummary
+                      ? Center(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SummaryPage(
+                                            cartId: cartList
+                                                .cartList[tabIndex].cartId,
+                                          )));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.orange,
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 80, vertical: 15),
+                              textStyle: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14.0),
+                              ),
+                            ),
+                            child: const Text("Go to cart"),
+                          ),
+                        )
+                      : Container(),
+                  const SizedBox(
+                    height: 15,
+                  )
+                ],
+              );
+            })));
   }
 }
