@@ -23,8 +23,8 @@ class _QuantityButtonState extends ConsumerState<QuantityButton> {
         .firstWhere((cart) => cart.cartId == widget.cartId,
             orElse: () => Cart(cartId: "", items: []))
         .items
-        .firstWhere((item) => item.id == widget.itemId,
-            orElse: () => CartItem(id: "", name: "", price: 0, quantity: 0))
+        .firstWhere((item) => item.itemId == widget.itemId,
+            orElse: () => CartItem(itemId: "", name: "", price: 0, quantity: 0))
         .quantity;
 
     return Row(

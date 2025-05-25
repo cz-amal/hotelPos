@@ -64,7 +64,7 @@ class _SummaryPageState extends ConsumerState<SummaryPage> {
                 itemCount: items.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 16),
                 itemBuilder: (context, index) {
-                  logger.i(int.parse(items[index].id));
+                  logger.i(int.parse(items[index].itemId));
                   return CartItemBar(
                     index: index,
                     cartId: widget.cartId,

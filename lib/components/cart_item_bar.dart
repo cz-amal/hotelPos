@@ -51,7 +51,7 @@ class _CartItemBarState extends ConsumerState<CartItemBar> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
-              tag: "product-${items[widget.index].id}",
+              tag: "product-${items[widget.index].itemId}",
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
@@ -127,7 +127,7 @@ class _CartItemBarState extends ConsumerState<CartItemBar> {
                       Row(
                         children: [
                           QuantityButton(
-                            itemId: items[widget.index].id,
+                            itemId: items[widget.index].itemId,
                             cartId: widget.cartId,
                           ),
                           const SizedBox(width: 12),
@@ -135,8 +135,8 @@ class _CartItemBarState extends ConsumerState<CartItemBar> {
                             onPressed: () {
                               ref
                                   .read(cartListNotifierProvider.notifier)
-                                  .deleteItemFromCart(
-                                      widget.cartId, items[widget.index].id);
+                                  .deleteItemFromCart(widget.cartId,
+                                      items[widget.index].itemId);
                             },
                             style: IconButton.styleFrom(
                               backgroundColor:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../providers/order_provider.dart';
 
@@ -25,6 +26,14 @@ class _OrderPageState extends ConsumerState<OrderPage> {
     super.initState();
     selectedFilter = filterOptions[0];
   }
+
+  String formatDate(DateTime date){
+    return DateFormat("yyyy-MM-dd").format(date);
+  }
+  String formatTime(DateTime time){
+    return DateFormat("hh:mm a").format(time);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +183,7 @@ class _OrderPageState extends ConsumerState<OrderPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Order #${orderList.orderList[index].orderId}",
+                                          "Order #${orderList.orderList[index].orderId.substring(0,8)}",
                                           style: GoogleFonts.varelaRound(
                                             color: Colors.white,
                                             fontSize: 16,
@@ -183,15 +192,16 @@ class _OrderPageState extends ConsumerState<OrderPage> {
                                         ),
                                         const SizedBox(height: 4),
                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             const Icon(
                                               Icons.access_time,
-                                              size: 14,
+                                              size: 16,
                                               color: Colors.grey,
                                             ),
                                             const SizedBox(width: 4),
                                             Text(
-                                              "${orderList.orderList[index].date}",
+                                              formatTime(orderList.orderList[index].date),
                                               style: GoogleFonts.varelaRound(
                                                 fontSize: 13,
                                                 color: Colors.grey,
@@ -227,7 +237,7 @@ class _OrderPageState extends ConsumerState<OrderPage> {
                                     ),
                                     const SizedBox(height: 6),
                                     Text(
-                                      "23 Apr 2025",
+                                      formatDate(orderList.orderList[index].date),
                                       style: GoogleFonts.varelaRound(
                                         fontSize: 12,
                                         color: Colors.grey[400],

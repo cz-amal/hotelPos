@@ -30,57 +30,63 @@ class _CustomTabBarState extends ConsumerState<CustomTabBar> {
   @override
   Widget build(BuildContext context) {
     final tabState = ref.watch(tabNotifierProvider);
-    return TabBar(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      dividerColor: Colors.black, // Removed the explicit divider
-      tabAlignment: TabAlignment.start,
-      isScrollable: true,
-      indicatorColor: Colors.black,
-      labelPadding: EdgeInsets.zero,
-      controller: widget.controller,
-      onTap: (index) {
-        setState(() {
-          selectedIndex = index;
-        });
-      },
-      tabs: List.generate(tabState.tabNames.length, (index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4.0),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            decoration: BoxDecoration(
-              color: selectedIndex == index
-                  ? Colors.orangeAccent
-                  : Colors.grey.shade900,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 20,
-              children: [
-                Text(
-                  tabState.tabNames[index],
-                  style: const TextStyle(color: Colors.white, fontSize: 14),
-                ),
-                InkWell(
-                  onTap: () {
-                    ref.read(tabNotifierProvider.notifier).removeTab(index);
-                  },
-                  borderRadius: BorderRadius.circular(10),
-                  child: const Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Icon(
-                      Icons.close_rounded,
-                      size: 16,
-                      color: Colors.grey,
-                    ),
+    return tabState.tabNames.isNotEmpty
+        ? TabBar(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            dividerColor: Colors.black, // Removed the explicit divider
+            tabAlignment: TabAlignment.start,
+            isScrollable: true,
+            indicatorColor: Colors.black,
+            labelPadding: EdgeInsets.zero,
+            controller: widget.controller,
+            onTap: (index) {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            tabs: List.generate(tabState.tabNames.length, (index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: selectedIndex == index
+                        ? Colors.orangeAccent
+                        : Colors.grey.shade900,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 20,
+                    children: [
+                      Text(
+                        tabState.tabNames[index],
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          ref
+                              .read(tabNotifierProvider.notifier)
+                              .removeTab(index);
+                        },
+                        borderRadius: BorderRadius.circular(10),
+                        child: const Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: Icon(
+                            Icons.close_rounded,
+                            size: 16,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-        );
-      }),
-    );
+              );
+            }),
+          )
+        : Container();
   }
 }

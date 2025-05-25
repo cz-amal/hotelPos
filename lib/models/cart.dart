@@ -1,13 +1,15 @@
+import 'package:uuid/uuid.dart';
 
 import 'cart_item.dart';
 
 class Cart {
   final String cartId;
   List<CartItem> items;
-  Cart({required this.cartId, required this.items});
+  Cart({String? cartId, required this.items})
+      : cartId = cartId ?? const Uuid().v4();
 
   @override
-  String toString(){
+  String toString() {
     return "Cart[cartId:$cartId,items:$items]";
   }
 }
