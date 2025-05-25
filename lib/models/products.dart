@@ -24,7 +24,7 @@ class Product {
 extension ProductToCartItem on Product {
   CartItem toCartItem() {
     return CartItem(
-      id: id,
+      itemId: id,
       name: name,
       price: price,
       quantity: 1,

@@ -44,15 +44,17 @@ class _OrderPageState extends ConsumerState<MenuPage>
   Widget build(BuildContext context) {
     final products = ref.watch(productProvider);
     final cartList = ref.watch(cartListNotifierProvider);
+    final tabState = ref.watch(tabNotifierProvider);
     final currentIndex = _tabController.index;
 
     // Only update the controller if the length has changed
-    if (_tabController.length != cartList.cartList.length) {
+    if (_tabController.length != tabState.tabNames.length) {
       _tabController.dispose();
+
       _tabController = TabController(
-        length: cartList.cartList.length,
+        length: tabState.tabNames.length,
         vsync: this,
-        initialIndex: currentIndex.clamp(0, cartList.cartList.length - 1),
+        initialIndex: 0,
       );
     }
     return Scaffold(
@@ -96,71 +98,75 @@ class _OrderPageState extends ConsumerState<MenuPage>
             color: Colors.black,
           ),
         ),
-        body: TabBarView(
-            controller: _tabController,
-            children: List.generate(cartList.cartList.length, (tabIndex) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // const ChipChoice(),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: GridView.builder(
-                      // Changed back to GridView.builder
-                      itemCount: products.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        // Added gridDelegate
-                        crossAxisCount: 2, // 2 columns
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 5,
-                        childAspectRatio: 0.9,
-                      ),
-                      itemBuilder: (context, index) {
-                        return MyMenuBar(
-                          cartId: cartList.cartList[tabIndex].cartId,
-                          product: products[index],
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  showSummary
-                      ? Center(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SummaryPage(
-                                            cartId: cartList
-                                                .cartList[tabIndex].cartId,
-                                          )));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.orange,
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 80, vertical: 15),
-                              textStyle: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14.0),
-                              ),
-                            ),
-                            child: const Text("Go to cart"),
+        body: tabState.tabNames.isNotEmpty
+            ? TabBarView(
+                controller: _tabController,
+                children: List.generate(tabState.tabNames.length, (tabIndex) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // const ChipChoice(),
+                      const SizedBox(height: 10),
+                      Expanded(
+                        child: GridView.builder(
+                          // Changed back to GridView.builder
+                          itemCount: products.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            // Added gridDelegate
+                            crossAxisCount: 2, // 2 columns
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 5,
+                            childAspectRatio: 0.9,
                           ),
-                        )
-                      : Container(),
-                  const SizedBox(
-                    height: 15,
-                  )
-                ],
-              );
-            })));
+                          itemBuilder: (context, index) {
+                            return MyMenuBar(
+                              cartId: cartList.cartList[tabIndex].cartId,
+                              product: products[index],
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      showSummary
+                          ? Center(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SummaryPage(
+                                                cartId: cartList
+                                                    .cartList[tabIndex].cartId,
+                                              )));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.orange,
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 80, vertical: 15),
+                                  textStyle: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14.0),
+                                  ),
+                                ),
+                                child: const Text("Go to cart"),
+                              ),
+                            )
+                          : Container(),
+                      const SizedBox(
+                        height: 15,
+                      )
+                    ],
+                  );
+                }))
+            : const Center(
+                child: Text("no active carts"),
+              ));
   }
 }

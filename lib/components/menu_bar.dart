@@ -26,8 +26,8 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
         .firstWhere((cart) => cart.cartId == widget.cartId,
             orElse: () => Cart(cartId: "", items: []))
         .items
-        .firstWhere((item) => item.id == widget.product.id,
-            orElse: () => CartItem(id: "", name: "", price: 0, quantity: 0))
+        .firstWhere((item) => item.itemId == widget.product.id,
+            orElse: () => CartItem(itemId: "", name: "", price: 0, quantity: 0))
         .quantity;
 
     return Container(
@@ -41,7 +41,9 @@ class _MyMenuBarState extends ConsumerState<MyMenuBar> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(

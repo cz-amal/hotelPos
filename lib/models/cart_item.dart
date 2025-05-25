@@ -1,19 +1,22 @@
+import 'package:uuid/uuid.dart';
+
 class CartItem {
-  final String id;
+  final String itemId;
   final String name;
   final double price;
   int quantity;
   double totalprice;
 
   CartItem(
-      {required this.id,
+      {String? itemId,
       required this.name,
       required this.price,
       required this.quantity,
-      this.totalprice = 0});
+      this.totalprice = 0})
+      : itemId = itemId ?? const Uuid().v4();
 
   @override
   String toString() {
-    return "CartItem[id:$id,name:$name,price:$price,quantity:$quantity,totalprice:$totalprice]";
+    return "CartItem[id:$itemId,name:$name,price:$price,quantity:$quantity,totalprice:$totalprice]";
   }
 }
