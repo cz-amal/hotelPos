@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotel_pos_app/pages/home_page.dart';
+import 'package:hotel_pos_app/pages/order_details_page.dart';
 import 'package:hotel_pos_app/pages/payment_page.dart';
 
 

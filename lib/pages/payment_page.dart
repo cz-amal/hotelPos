@@ -201,10 +201,8 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
               ElevatedButton(
                 onPressed: () {
                   // get current cart
-                  List<Cart> cartList =
-                      ref.read(cartListNotifierProvider).cartList;
                   Order newOrder = Order(
-                      cartId: widget.cartId,
+                      items: items,
                       itemCount: items.length.toString(),
                       totalPrice: (totalMrp * 1.035).toStringAsFixed(2),
                       date: DateTime.now());
