@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hotel_pos_app/providers/cart_provider.dart';
 import 'package:hotel_pos_app/providers/tab_provider.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class CustomTabBar extends ConsumerStatefulWidget
     implements PreferredSizeWidget {
@@ -67,9 +70,22 @@ class _CustomTabBarState extends ConsumerState<CustomTabBar> {
                       ),
                       InkWell(
                         onTap: () {
-                          ref
-                              .read(tabNotifierProvider.notifier)
-                              .removeTab(index);
+                          QuickAlert.show(
+                              context: context,
+                              type: QuickAlertType.confirm,
+                              text: 'Do you want to delete this cart?',
+                              confirmBtnText: 'Yes',
+                              cancelBtnText: 'No',
+                              confirmBtnColor: Colors.green,
+                              onCancelBtnTap: () {
+                                Navigator.pop(context);
+                              },
+                              onConfirmBtnTap: () {
+                                ref
+                                    .read(cartListNotifierProvider.notifier)
+                                    .deleteCart(tabState.cartIds[index]);
+                                Navigator.pop(context);
+                              });
                         },
                         borderRadius: BorderRadius.circular(10),
                         child: const Padding(

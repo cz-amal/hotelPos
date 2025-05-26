@@ -89,7 +89,6 @@ class _OrderPageState extends ConsumerState<MenuPage>
           shape: const CircleBorder(),
           onPressed: () {
             ref.read(cartListNotifierProvider.notifier).addCart();
-            ref.read(tabNotifierProvider.notifier).addTab();
             print(cartList.toString());
           },
           backgroundColor: Colors.orange[500],
