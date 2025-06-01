@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hotel_pos_app/models/cart_list.dart';
 import 'package:hotel_pos_app/models/order.dart';
 import 'package:hotel_pos_app/providers/cart_provider.dart';
 import 'package:hotel_pos_app/providers/order_provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-import '../models/cart.dart';
 
 class PaymentPage extends ConsumerStatefulWidget {
   final String price;

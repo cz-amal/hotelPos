@@ -280,7 +280,7 @@ class _OrderPageState extends ConsumerState<OrderPage> {
                                 Expanded(
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderDetailsPage()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const OrderDetailsPage()));
                                     },
                                     icon: const Icon(
                                       Icons.visibility_outlined,
