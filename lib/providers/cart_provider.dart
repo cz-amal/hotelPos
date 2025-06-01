@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hotel_pos_app/models/cart_item.dart';
 import 'package:hotel_pos_app/models/cart_list.dart';
+import 'package:hotel_pos_app/providers/tab_provider.dart';
 
 import '../models/cart.dart';
 
@@ -41,16 +42,19 @@ class CartListNotifier extends Notifier<CartList> {
   }
 
   void addCart() {
+    final newCart = Cart(items: []);
     state = CartList(cartList: [
       ...state.cartList,
-      Cart(items: []),
+      newCart,
     ]);
+    ref.read(tabNotifierProvider.notifier).addTab(newCart.cartId);
   }
 
   void deleteCart(String cartId) {
     state = CartList(
       cartList: state.cartList.where((cart) => cart.cartId != cartId).toList(),
     );
+    ref.read(tabNotifierProvider.notifier).removeTab(cartId);
   }
 
   void addItemToCart(String cartId, CartItem newItem) {

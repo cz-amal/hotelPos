@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:hotel_pos_app/components/cart_summary.dart';
-import 'package:hotel_pos_app/components/chip_choice.dart';
 import 'package:hotel_pos_app/components/custom_tab_bar.dart';
 import 'package:hotel_pos_app/pages/summary_page.dart';
 import 'package:hotel_pos_app/providers/cart_provider.dart';
@@ -89,7 +87,6 @@ class _OrderPageState extends ConsumerState<MenuPage>
           shape: const CircleBorder(),
           onPressed: () {
             ref.read(cartListNotifierProvider.notifier).addCart();
-            ref.read(tabNotifierProvider.notifier).addTab();
             print(cartList.toString());
           },
           backgroundColor: Colors.orange[500],

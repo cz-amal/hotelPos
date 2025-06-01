@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotel_pos_app/pages/order_details_page.dart';
 import 'package:intl/intl.dart';
 
 import '../providers/order_provider.dart';
@@ -279,7 +280,7 @@ class _OrderPageState extends ConsumerState<OrderPage> {
                                 Expanded(
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Handle view details
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const OrderDetailsPage()));
                                     },
                                     icon: const Icon(
                                       Icons.visibility_outlined,
